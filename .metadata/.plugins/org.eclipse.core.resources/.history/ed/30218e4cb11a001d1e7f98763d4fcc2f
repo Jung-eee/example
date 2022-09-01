@@ -1,0 +1,98 @@
+
+import java.util.Scanner;
+
+public class MyMain {
+	public static void main(String[] args) {
+		DB_Connection dbCon = new DB_Connection();
+		Scanner sc = new Scanner(System.in);
+		int choice = 0;
+
+		while (true) {
+
+			MySelect.menu();
+
+			System.out.print("입력 >>> ");
+			choice = sc.nextInt();
+			System.out.println("선택: " + choice + '\n');
+
+			if (choice == 1) {
+
+				// search()
+				dbCon.selectAll();
+
+			} else if (choice == 2) {
+				
+				MySelect.sub_menu();
+				
+				System.out.print("입력 >>> ");
+				String selec = sc.next();
+				System.out.println("선택: " + selec + '\n');
+				
+				if (selec.equals("company") || selec.equals("1")) {
+					
+					System.out.print("회사 입력 >>> ");
+					String company = sc.next();
+					System.out.println();
+					dbCon.selectWhereCompany(company);
+					
+				} else if (selec.equals("provider") || selec.equals("2")) {
+					
+					System.out.print("통신사 입력 >>> ");
+					String company = sc.next();
+					System.out.println();
+					dbCon.selectWhereCompany(company);
+					
+				} else if (selec.equals("company and provider") || selec.equals("3")) {
+					
+					System.out.print("제조사 입력 >>> ");
+					String company = sc.next();
+					System.out.println();
+					dbCon.selectWhereCompany(company);
+					
+				} else if (selec.equals("company and price") || selec.equals("4")) {
+					
+					System.out.print("제조사 입력 >>> ");
+					String company = sc.next();
+					System.out.println();
+					dbCon.selectWhereCompany(company);
+					
+				}  
+					
+
+			} else if (choice == 3) {
+				System.out.print("이름 입력 >>> ");
+				String name = sc.next();
+				System.out.print("나이 입력 >>> ");
+				int age = sc.nextInt();
+				System.out.print("키 입력 >>> ");
+				double height = sc.nextDouble();
+
+				dbCon.insertPerson(name, age, height);
+
+			} else if (choice == 4) {
+				System.out.print("수정할 사람의 이름 입력 >>> ");
+				String name = sc.next();
+				System.out.print("수정할 이름 입력 >>> ");
+				String name2 = sc.next();
+				System.out.print("수정할 나이 입력 >>> ");
+				int age = sc.nextInt();
+				System.out.print("수정할 키 입력 >>> ");
+				double height = sc.nextDouble();
+
+				dbCon.updatePerson(name, name2, age, height);
+
+			} else if (choice == 5) {
+				System.out.println("삭제할 사람의 이름 입력 >>> ");
+				String name = sc.next();
+
+				dbCon.deletePerson(name);
+			} else if (choice == 6) {
+				System.out.println("종료합니다.");
+				break;
+			}
+
+		}
+		sc.close();
+	}
+
+}

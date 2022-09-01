@@ -1,0 +1,61 @@
+import java.util.Scanner;
+
+
+public class MyMain {
+	public static void main(String[] args) {
+		DB_Connection dbCon = new DB_Connection();
+		Scanner sc = new Scanner(System.in);
+		int choice = 0;
+
+		while (true) {
+			MySelect.menu();
+			System.out.println("입력 >>> ");
+			choice = sc.nextInt();
+			sc.nextLine();
+			
+			if (choice == 1) {
+				System.out.println("몇번 페이지를 조회? >>> ");
+				int page = sc.nextInt();
+				sc.nextLine();
+				dbCon.selectBoardPage(page);
+				
+			} else if (choice == 2) {
+				System.out.print("title: ");
+				String title = sc.nextLine();
+//				title.split(" ");
+				
+				System.out.print("contents: ");
+				String contents = sc.nextLine();
+//				contents.split(" ");
+				
+				System.out.print("author: ");
+				String author = sc.nextLine();
+//				author.split(" ");
+				
+				System.out.print("attach(Y or N): ");
+				String attach = sc.nextLine();
+//				attach.split(" ");
+				
+				System.out.print("hits: ");
+				int hits = sc.nextInt();
+				sc.nextLine();
+				
+				dbCon.insertBoard(title, contents, author, attach, hits);
+			} else if (choice == 3) {
+				// 수정 (Update)
+				System.out.println("수정할 제목 입력: ");
+				String title =sc.nextLine();
+				
+				System.out.println("수정할 글 번호 입력: ");
+				int no = sc.nextInt();
+				sc.nextLine();
+				
+			} else {
+				System.out.println("프로그램이 종료됩니다.");
+				break;
+			}
+			
+		}
+		sc.close();
+	}
+}

@@ -1,0 +1,61 @@
+@charset "UTF-8";
+#modal1 {
+	height : 200px;
+}
+.modal_body {
+	text-align: center;
+    margin-top: 70px;
+}
+.submit_btn {
+	margin-left: 12px;
+    background-color: #4425a7;
+    border-style: none;
+    border-radius: 5px;
+    width: 50px;
+    height: 30px;
+    color: white;
+    padding-top: 9px;
+    transition: .1s all;
+}
+.submit_btn:hover {
+	margin-left: 12px;
+    background-color: #e0daf5;
+    border-style: none;
+    border-radius: 5px;
+    width: 50px;
+    height: 30px;
+    color: #4425a7;
+    padding-top: 9px;
+}
+.modal_delete {
+	text-align: center;
+	margin-top: 30px;
+}
+
+.yes_or_no {
+	margin : 10px 0;
+}
+
+.delete_title {
+	font-size : 16px;
+}
+.modal-admin {
+   margin-top : 35px;
+}
+
+.delete_title {
+   font-size : 16px;
+}
+
+.passwd-box {
+   margin : 20px auto;
+}
+
+.id-input, .passwd-input {
+   border: none;
+    border-bottom: 1px solid gray;
+}
+
+.passwd-input {
+   width: 36%;
+}

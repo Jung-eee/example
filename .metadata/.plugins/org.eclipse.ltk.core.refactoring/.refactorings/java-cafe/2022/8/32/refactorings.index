@@ -1,0 +1,20 @@
+1659339449542	Delete element
+1659340349892	Rename package 'com.varxyz.javacafe.Dao'
+1659340357857	Rename package 'com.varxyz.javacafe.Controller'
+1659403316073	Rename resource 'menuItem'
+1659403325215	Rename resource 'add_menuItem.jsp'
+1659406246710	Copy compilation unit
+1659406259072	Delete element
+1659406327255	Copy compilation unit
+1659407455738	Rename type 'menutItemService'
+1659408571633	Copy file
+1659409231263	Rename resource 'add_susccess_menuitem.jsp'
+1659486143324	Move 'header.jsp' to 'incl'
+1659486184000	Move 'customize.css' to 'css'
+1659486192760	Copy file
+1659488023521	Delete element
+1659578923575	Move 'coffee.png' to 'menuImg'
+1659578936642	Delete element
+1659597553420	Delete element
+1659667092642	Move 'main.jsp' to 'kiosk'
+1659667470645	Copy file

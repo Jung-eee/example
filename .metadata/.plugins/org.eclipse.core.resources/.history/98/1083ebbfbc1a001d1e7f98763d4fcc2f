@@ -1,0 +1,170 @@
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+
+public class DB_Connection {
+
+	private Connection con; // 연결관련 할당 객체 변수
+	private Statement st; // SQL실행 관련 변수
+	private ResultSet rs; // SQL 실행한 결과가 저장되는 변수
+	private PreparedStatement pstmt; // 준비된 Statement
+	// 미완성형 쿼리 (? ? ?) 를 실행하기 위한 statement
+
+	public DB_Connection() {
+		// default construction
+		// 객체가 생성될때 호출되는게
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver"); // MySQL 관련 드라이버
+			con = DriverManager.getConnection(
+					"jdbc:mysql://127.0.0.1:3306/JAVA_DBMS_TEST?serverTimezone=UTC&useSSL=false", "root", "admin");
+			st = con.createStatement();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void selectAll(int selec) {
+		String SQL = "";
+		
+		if (selec == 1) {
+			SQL = "select * from smartphone order by `price` asc";
+		} else if (selec == 2){
+			SQL = "SELECT * FROM smartphone order by `price` desc";
+		} else {
+			SQL = "SELECT * FROM smartphone";
+		}
+		
+		this.printSelect(SQL);
+	}
+
+	public void selectWhereCompany(String company, int...prices ) {
+		String SQL = "";
+		if ( prices.length != 2 ) {
+			SQL = String.format("Select * FROM `smartphone` Where `company` = \'%s\'", company);
+		} else {
+			SQL = String.format(
+					"Select * FROM `smartphone` Where `company` = '%s' and `price` BETWEEN '%d' and '%d'", company,
+					prices[0], prices[1]);
+		}
+		this.printSelect(SQL);
+	}
+
+	public void selectWhereProvider(String provider) {
+		String SQL = String.format("Select * FROM `smartphone` Where `provider` = '%s'", provider);
+		this.printSelect(SQL);
+	}
+
+	public void selectWhereCompanyAndPrice(String provider) {
+		String SQL = String.format("Select * FROM `smartphone` Where `provider` = '%s'", provider);
+		this.printSelect(SQL);
+
+	}
+
+	public void selectWhereCompanyAndProvider(String company, String provider) {
+		String SQL = String.format("Select * FROM `smartphone` Where `company` = '%s' and `provider` = '%s'",
+				company, provider);
+		this.printSelect(SQL);
+	}
+	
+	public void selectName(String name) {
+		String SQL = "Select * FROM `smartphone` Where `name` LIKE '" + "%" + name + "%" + "'";
+		this.printSelect(SQL);
+	}
+
+	public void insertData(String name, String company, int price, String provider, int weight, String color) {
+
+		String SQL = "insert into `smartphone` values(?,?,?,?,?,?)";
+		try {
+			pstmt = con.prepareStatement(SQL); // 미완성형 SQL 준비
+
+			pstmt.setString(1, name);
+			pstmt.setString(2, company);
+			pstmt.setInt(3, price);
+			pstmt.setString(4, provider);
+			pstmt.setInt(5, weight);
+			pstmt.setString(6, color);
+
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
+		System.out.println("테이블이 업데이트되었습니다.");
+
+	}
+
+	public void updateData(String name, String provider, int price) {
+		String SQL = "update `smartphone` set `price`=? where `name`=? and `provider`=?";
+		try {
+			pstmt = con.prepareStatement(SQL);
+
+			pstmt.setInt(1, price);
+			pstmt.setString(2, name);
+			pstmt.setString(3, provider);
+
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
+		System.out.println("테이블이 수정되었습니다.");
+	}
+
+	public void deleteData(String name, String color) {
+		String SQL = "delete from `smartphone` where `name`=? and `color`=?";
+		try {
+			pstmt = con.prepareStatement(SQL);
+
+			pstmt.setString(1, name);
+			pstmt.setString(2,  color);
+			
+			pstmt.executeUpdate();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return;
+		}
+		System.out.println("테이블이 수정되었습니다.");
+	}
+	
+	public void printSelect(String SQL) {
+		try {
+			rs = st.executeQuery(SQL);
+			
+			while (rs.next()) {
+				String name = rs.getString("name");
+				String company = rs.getString("company");
+				int price = rs.getInt("price");
+				String provider = rs.getString("provider");
+				int weight = rs.getInt("weight");
+				String color = rs.getString("color");
+
+				System.out.println();
+
+				for (int i = 0; i < 30; i++)
+					System.out.print('*');
+				System.out.println();
+
+				System.out.printf("name: %s\n", name);
+				System.out.printf("company: %s\n", company);
+				System.out.printf("price: %d\n", price);
+				System.out.printf("provider: %s\n", provider);
+				System.out.printf("weight: %d\n", weight);
+				System.out.printf("color: %s\n", color);
+
+				for (int i = 0; i < 30; i++)
+					System.out.print('*');
+				System.out.println();
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+}

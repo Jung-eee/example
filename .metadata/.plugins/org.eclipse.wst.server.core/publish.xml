@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<publish-info>
+  <server id="fileStation" path="publish5.dat"/>
+  <server id="test" path="publish4.dat"/>
+  <server id="Tomcat v8.5 Server at localhost (2)" path="publish1.dat"/>
+  <server id="JungBanking" path="publish2.dat"/>
+  <server id="java-cafe" path="publish3.dat"/>
+  <server id="Tomcat v8.5 Server at localhost (3)" path="publish6.dat"/>
+  <server id="Tomcat v8.5 Server at localhost" path="publish0.dat"/>
+</publish-info>

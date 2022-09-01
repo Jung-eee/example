@@ -1,0 +1,28 @@
+package com.varxyz.djoTest.exam;
+
+import java.util.Scanner;
+
+public class Main1 {
+	public static void main(String[] args) {
+		Scanner sc = new Scanner(System.in);
+		int n1,n2,n3;
+		n1 = sc.nextInt();
+		n2 = sc.nextInt();
+		n3 = sc.nextInt();
+		
+		if (n2 + n3 < 60 ) {
+			System.out.println(n1 + " " + (n2+n3));
+		} else{
+			int n4 = n2 + n3;
+			int n5 = n4 % 60; //분
+			int n6 = n4 / 60; //시
+			n1 = n1 + n6;
+			n2 = n2 + n5;
+			if (n1 >= 24) {
+				n1 = n1 -24;
+			}
+			System.out.println(n1 + " " + n2);
+		}
+		
+	}
+}

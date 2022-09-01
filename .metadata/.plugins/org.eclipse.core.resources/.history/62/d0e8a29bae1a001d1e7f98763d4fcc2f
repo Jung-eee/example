@@ -1,0 +1,34 @@
+
+public class MySelect {
+	public static void menu() { // 객체 생성안해도 되도록 static
+		System.out.println();
+		System.out.println("1.모두 조회");
+		System.out.println("2.조건 조회");
+//		System.out.println("3.추가");
+//		System.out.println("4.수정");
+//		System.out.println("5.삭제");
+//		System.out.println("6.종료");
+
+	}
+
+	public static void sub_menu() {
+		
+		System.out.println();
+		for (int i = 0; i < 30; i++)
+			System.out.print("*");
+		System.out.println();
+		
+		System.out.println("MENU_LIST");
+		System.out.println("1. name");
+		System.out.println("2. LG");
+		System.out.println("3. price");
+		System.out.println("4. provider");
+		System.out.println("5. weight ");
+		System.out.println("6. color ");
+		
+		System.out.println();
+		for (int i = 0; i < 30; i++)
+			System.out.print("*");
+		System.out.println();
+	}
+}

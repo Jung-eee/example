@@ -1,0 +1,92 @@
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.PreparedStatement;
+
+public class DB_Connection {
+
+	private Connection con; // 연결관련 할당 객체 변수
+	private Statement st; // SQL실행 관련 변수
+	private ResultSet rs; // SQL 실행한 결과가 저장되는 변수
+	private PreparedStatement pstmt; // 준비된 Statement
+	// 미완성형 쿼리 (? ? ?) 를 실행하기 위한 statement
+
+	public DB_Connection() {
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver"); // MySQL 관련 드라이버
+			con = DriverManager.getConnection(
+					"jdbc:mysql://127.0.0.1:3306/react_board_db?serverTimezone=UTC&useSSL=false", "root", "admin");
+			st = con.createStatement();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	public void selectBoardPage(int page) {
+		String SQL = String.format("select * from `board` limit %d, 10", (page-1)*10 );
+		this.printSelect(SQL);
+	}
+	
+	public void insertBoard(String title, String contents, String author, String attach, int hits) {
+		String SQL = "Insert into `board` Values(?, ?, ?, now(), ?, ?)";
+		
+		try {
+			
+			pstmt = con.prepareStatement(SQL);
+			pstmt.setString(1, title);
+			pstmt.setString(2,  contents);
+			pstmt.setString(3, author);
+			pstmt.setString(4, attach);
+			pstmt.setInt(5, hits);
+			
+			pstmt.executeUpdate();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void printSelect(String SQL) {
+		try {
+			rs = st.executeQuery(SQL);
+			
+			while (rs.next()) {
+				int no = rs.getInt("no");
+				String title = rs.getString("title");
+				String contents = rs.getString("contents");
+				String author = rs.getString("author");
+				String regDate = rs.getString("regDate");
+				String attach = rs.getString("attach");
+				int hits = rs.getInt("hits");
+				
+				System.out.println();
+				for (int i=0; i<30; i++) {
+					System.out.print('*');
+				}
+				System.out.println();
+				
+				System.out.printf("no : %d\n", no);
+				System.out.printf("title : %s\n", title);
+				System.out.printf("contents : %s\n", contents);
+				System.out.printf("author : %s\n", author);
+				System.out.printf("regDate : %s\n", regDate);
+				System.out.printf("attach : %s\n", attach);
+				System.out.printf("hits : %d\n", hits);
+				
+				for (int i=0; i<30; i++) {
+					System.out.print('*');
+				}
+				System.out.println();
+			}
+			
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	
+
+}

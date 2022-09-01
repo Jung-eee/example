@@ -1,0 +1,50 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Scanner;
+
+
+public class MyMain {
+	public static void main(String[] args) {
+		DB_Connection dbCon = new DB_Connection();
+		Scanner sc = new Scanner(System.in);
+		int choice = 0;
+
+		while (true) {
+			MySelect.menu();
+			System.out.println("입력 >>> ");
+			choice = sc.nextInt();
+			
+			if (choice == 1) {
+				System.out.println("몇번 페이지를 조회? >>> ");
+				int page = sc.nextInt();
+				dbCon.selectBoardPage(page);
+				
+			} else if (choice == 2) {
+				System.out.print("title: ");
+				String title = sc.nextLine();
+				sc.nextLine();
+				System.out.print("content: ");
+				String content = sc.nextLine();
+				sc.nextLine();
+				System.out.print("author: ");
+				String author = sc.nextLine();
+				sc.nextLine();
+				System.out.print("attach(Y or N): ");
+				String attach = sc.nextLine();
+				sc.nextLine();
+				System.out.print("hits: ");
+				int hits = sc.nextInt();
+				LocalDate now = LocalDate.now();
+				DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"); 
+				String regDate = now.format(formatter);
+				
+				dbCon.insertBoard(title, content, author, regDate, attach, hits);
+			} else {
+				System.out.println("프로그램이 종료됩니다.");
+				break;
+			}
+			
+		}
+		sc.close();
+	}
+}

@@ -1,0 +1,31 @@
+
+public class MySelect {
+	public static void menu() { // 객체 생성안해도 되도록 static
+		System.out.println("1.게시판 조회");
+		System.out.println("2.게시글 추가");
+//		System.out.println("3.추가");
+//		System.out.println("4.수정");
+//		System.out.println("5.삭제");
+//		System.out.println("6.종료");
+
+	}
+
+	public static void sub_menu() {
+		
+		System.out.println();
+		for (int i = 0; i < 30; i++)
+			System.out.print("*");
+		System.out.println();
+		
+//		System.out.println("MENU_LIST");
+//		System.out.println("1 company");
+//		System.out.println("2 provider");
+//		System.out.println("3 company and provider");
+//		System.out.println("4 company and price ");
+//		System.out.println("5 name");
+		
+		for (int i = 0; i < 30; i++)
+			System.out.print("*");
+		System.out.println();
+	}
+}

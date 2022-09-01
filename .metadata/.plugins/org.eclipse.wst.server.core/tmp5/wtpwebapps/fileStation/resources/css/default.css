@@ -1,0 +1,49 @@
+@charset "UTF-8";
+@font-face {
+    font-family: 'OTWelcomeRA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2110@1.0/OTWelcomeRA.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+  box-sizing: border-box;
+}
+
+*:focus {
+	outline: none;
+}
+html,
+body {
+  width: 100vw;
+  height: 100vh;
+}
+body {
+  font-family: 'OTWelcomeRA';
+  color: #666666;
+}
+
+input[type=password]{
+	font-family: '맑은 고딕', 'malgun gothic', '돋움', Dotum, sans-serif;
+}
+
+input[type=password]::placeholder {
+	font-size: 14px;
+	line-height: 20px;
+	font-family: 'OTWelcomeRA';
+}
+
+ul,
+ol {
+  list-style: none;
+}
+a {
+  color: #666666;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1;
+}
